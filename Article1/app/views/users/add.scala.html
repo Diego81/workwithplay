@@ -1,0 +1,13 @@
+@(userForm: Form[User])
+
+@import helper._
+@import models.User
+
+@main("Add a new User") {
+	<h1>Add a new User</h1>
+	@form(routes.Users.save()) {
+		@inputText(userForm("username"))
+		@inputText(userForm("email"))
+		<button type="submit">Save</button>
+	}
+}

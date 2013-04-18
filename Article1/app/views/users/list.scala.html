@@ -1,0 +1,17 @@
+@(users: Iterable[models.User])
+
+@main("All Users") {
+	<h1>All Users</h1>
+	@if(users.isEmpty) {
+		<p>No Users found</p>
+	} else {
+		<ul>
+		@for(user <- users) {
+  			<li>@user.username @user.email 
+  			<a href="@routes.Users.edit(user.id)">Edit</a>
+  			@helper.form(routes.Users.delete(user.id)){<button type="submit">Delete</button>}</li>
+		} 
+		</ul>
+	}
+	<a href="@routes.Users.add">Add a new User</a>
+}
