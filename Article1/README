@@ -1,4 +1,1 @@
-This is your new Play 2.1 application
-=====================================
-
-This file will be packaged with your application, when using `play dist`.
+Simple CRUD application to manage users. Form validation, internationalization and persistence were skipped as they will be covered in future articles.
