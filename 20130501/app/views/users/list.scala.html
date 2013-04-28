@@ -1,0 +1,20 @@
+@(users: Iterable[models.User])(implicit flash:Flash)
+
+@main("All Users") {
+	<h1>All Users</h1>
+	@flash.get("success").map { msg =>
+		<div class="flash">@msg</div>
+	}
+	@if(users.isEmpty) {
+		<p>No Users found</p>
+	} else {
+		<ul>
+		@for(user <- users) {
+  			<li>@user.username @user.email @user.age
+  			<a href="@routes.Users.edit(user.id)">Edit</a>
+  			@helper.form(routes.Users.delete(user.id)){<button type="submit">Delete</button>}</li>
+		} 
+		</ul>
+	}
+	<a href="@routes.Users.add">Add a new User</a>
+}

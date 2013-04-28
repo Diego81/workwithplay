@@ -1,0 +1,22 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# The following lines point to the echo actions. They have nothing to do with the application logic.
+# They are used just to show some alternative approaches to access a request parameter.
+GET 	/users/echo					controllers.Users.echo
+POST 	/users/echopost				controllers.Users.echoPost
+
+GET 	/users						controllers.Users.list
+GET		/users/add					controllers.Users.add
+POST	/users						controllers.Users.save
+GET		/users/:id/edit				controllers.Users.edit(id: Int)
+POST	/users/:id					controllers.Users.update(id: Int)
+POST	/users/:id/delete			controllers.Users.delete(id: Int)
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
