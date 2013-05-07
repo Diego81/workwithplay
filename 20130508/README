@@ -1,4 +1,1 @@
-This is your new Play 2.1 application
-=====================================
-
-This file will be packaged with your application, when using `play dist`.
+Persist data with Anorm: http://workwithplay/blog/2013/05/08/persist-data-with-anorm/
