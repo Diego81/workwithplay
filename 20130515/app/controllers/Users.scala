@@ -8,6 +8,7 @@ import play.api.libs.json._
 import anorm._
 import models.User
 import scala.collection.mutable.HashMap
+import play.api.templates.Html
 
 object Users extends Controller {
 
@@ -24,15 +25,15 @@ object Users extends Controller {
 
   def save = Action { implicit request =>
     form.bindFromRequest.fold(
-      formWithErrors => handleError(formWithErrors),
+      formWithErrors => handleError(formWithErrors, views.html.users.add(formWithErrors)),
       user => {
         User.save(user)
         handleSuccess("User successfully created!")
       })
   }
   
-  private def handleError(formWithErrors: Form[User])(implicit request: RequestHeader) = render {
-          case Accepts.Html() => BadRequest(views.html.users.add(formWithErrors))
+  private def handleError(formWithErrors: Form[User], html: Html)(implicit request: RequestHeader) = render {
+          case Accepts.Html() => BadRequest(html)
           case Accepts.Json() => BadRequest(toJson(formWithErrors))
         }
 
@@ -108,7 +109,7 @@ object Users extends Controller {
   def update(id: Int) = Action { implicit request =>
     User.load(id).map { user =>
       form.bindFromRequest.fold(
-      formWithErrors => handleError(formWithErrors),
+      formWithErrors => handleError(formWithErrors,views.html.users.edit(formWithErrors)),
         userWithNewValues => {
           User.update(id, userWithNewValues)
           handleSuccess("User successfully updated!")
