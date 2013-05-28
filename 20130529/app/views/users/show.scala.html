@@ -1,0 +1,32 @@
+@(user: models.User)(implicit flash:Flash)
+
+@main("User details") {
+	<h2>User details</h2>
+	@flash.get("success").map { msg =>
+		<div class="flash">@msg</div>
+	}
+	<a href="@routes.Users.edit(user.id.get)">Edit</a>
+	@helper.form(routes.Users.delete(user.id.get)){<button type="submit">Delete</button>}</li>
+	<table>
+		<tr>
+			<th>Username</th>
+			<th>Age</th>
+		</tr>
+		<tr>
+			<td>@user.username</td>
+			<td>@user.age</td>
+		</tr>
+	</table>
+	
+	<h3>Contacts</h3>
+	<ul>
+		@for(contact <- user.contacts) {
+		<li>
+			<span class="contactType">@contact.contactType: </span> @contact.contact 
+			<a href="@routes.Contacts.edit(user.id.get, contact.id.get)">Edit</a>
+			@helper.form(routes.Contacts.delete(user.id.get, contact.id.get)){<button type="submit">Delete</button>}
+		</li>
+		}
+	</ul>
+	<a href="@routes.Contacts.add(user.id.get)">Add a new Contact</a>
+}
