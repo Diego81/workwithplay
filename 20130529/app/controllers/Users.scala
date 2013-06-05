@@ -73,14 +73,14 @@ object Users extends RenderMultipleFormats[User] {
   def edit(id: Int) = Action {
     User.load(id).map { user =>
       val bindedForm = form.fill(user)
-      Ok(views.html.users.edit(bindedForm))
+      Ok(views.html.users.edit(id, bindedForm))
     }.getOrElse(NotFound)
   }
 
   def update(id: Int) = Action { implicit request =>
     User.load(id).map { user =>
       form.bindFromRequest.fold(
-      formWithErrors => handleError(formWithErrors,views.html.users.edit(formWithErrors)),
+      formWithErrors => handleError(formWithErrors,views.html.users.edit(id, formWithErrors)),
         userWithNewValues => {
           User.update(id, userWithNewValues)
           handleSuccess(routes.Users.show(id), "User successfully updated!")
