@@ -1,0 +1,13 @@
+@(user: User, contactForm: Form[Contact])
+
+@import helper._
+@import models.Contact
+
+@main("Add a Contact to ${user.username}") {
+	<h1>Add a Contact to @user.username</h1>
+	@form(routes.Contacts.save(user.id.get)) {
+		@formFields(contactForm)
+		<button type="submit">Save</button>
+		<a href="@routes.Users.show(user.id.get)">Cancel</a>
+	}
+}
