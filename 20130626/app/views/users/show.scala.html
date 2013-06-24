@@ -1,0 +1,120 @@
+@(user: models.User)(implicit flash:Flash)
+
+@main("User details") {
+	<h1>User details</h1>
+	@flash.get("success").map { msg =>
+		<div class="alert alert-success">@msg</div>
+	}
+	<div id="alertDiv"></div>
+	<div><a href="@routes.Users.list">Back to All Users</a></div>
+	<table class="table">
+		<tr>
+			<th>Username</th>
+			<th>Age</th>
+		</tr>
+		<tr>
+			<td id="username-value">@user.username</td>
+			<td id="age-value">@user.age</td>
+		</tr>			
+	</table>
+	<div class="btn-group user-buttons">
+		<a class="btn" href="#" id="editUserBtn">Edit</a>
+		@helper.form(routes.Users.delete(user.id.get), 'class -> "delete-form"){<button class="btn btn-danger" type="submit">Delete</button>}
+	</div>
+	<div class="row">
+		<div class="span6">
+	<h3>Contacts</h3>
+		<ul id="contacts">
+			@for(contact <- user.contacts) {
+			<li data-contact-id="@contact.id.get" data-contact-type="@contact.contactType" data-contact="@contact.contact">
+				<div class="span4">
+					<span class="contactType">@contact.contactType: </span> @contact.contact 
+				</div>
+				<button class="btn editContact">Edit</button>
+				@helper.form(routes.Contacts.delete(user.id.get, contact.id.get), 'class -> "delete-form"){<button class="btn  btn-danger" type="submit">Delete</button>}
+			</li>
+			}
+		</ul>
+		</div>
+	</div>
+	<button id="addContactBtn" class="btn btn-primary">Add a new Contact</button>
+
+	@* User modal window *@
+	<div id="userModal" class="modal hide fade">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>User Form</h3>
+	  </div>
+	  <div class="modal-body">
+		<form class="form-horizontal">
+		  <div class="control-group">
+		    <label class="control-label" for="username">Username</label>
+		    <div class="controls">
+		      <input type="text" id="username">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="age">Age</label>
+		    <div class="controls">
+		      <input type="text" id="age">
+		    </div>
+		  </div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+	    <a href="#" class="btn" id="closeBtn">Close</a>
+	    <a href="#" class="btn btn-primary" id="saveBtn">Save</a>
+	  </div>
+	</div>
+	@* Contact modal window *@
+	<div id="contactModal" class="modal hide fade">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>Contact Form</h3>
+	  </div>
+	  <div class="modal-body">
+		<form class="form-horizontal">
+		  <div class="control-group">
+		    <label class="control-label" for="contactType">Contact Type</label>
+		    <div class="controls">
+		      <input type="text" id="contactType" placeholder="Contact Type">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="contact">Contact</label>
+		    <div class="controls">
+		      <input type="text" id="contact" placeholder="Contact">
+		    </div>
+		  </div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+	    <a href="#" class="btn" id="closeBtn">Close</a>
+	    <a href="#" class="btn btn-primary" id="saveBtn">Save</a>
+	  </div>
+	</div>
+	@* Mustache templates *@
+	<div id="dataDiv" data-user-id="@user.id.get" style="display: none;">
+		<div id="alertTmpl">
+			<div>
+				<button type="button" class="close" data-dismiss="alert">&times;</button>{{msg}}
+			</div>	
+		</div>
+		<div id="contactTmpl">
+			{{#contact}}
+			<li data-contact-id="{{id}}" data-contact-type="{{contactType}}" data-contact="{{contact}}">
+			<div class="span4">
+				<span class="contactType">{{contactType}}: </span> {{contact}}
+			</div>
+			{{/contact}}
+				<button class="btn editContact">Edit</button>
+				{{#form}}				
+				<form action="{{action}}" method="{{method}}" class="delete-form"><button class="btn btn-danger" type="submit">Delete</button></form>
+				{{/form}}
+			</li>
+		</div>
+		<div id="errorTmpl">
+			<span class="error">{{msg}}</span>
+		</div>
+	</div>
+}
