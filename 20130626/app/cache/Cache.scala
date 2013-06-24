@@ -65,7 +65,7 @@ trait ExpiryCache[T] extends Cache[T] {
   override def getOrFetch(key: String)(fetch: () => T): T = {
     if (lastAccess.contains(key) && System.currentTimeMillis - lastAccess(key) > timeout) {
       play.api.Logger.debug("Timeout expired, clearing the cache ...")
-      super.clear(key)
+      clear(key)
     }
     lastAccess = lastAccess + (key -> System.currentTimeMillis)
     super.getOrFetch(key)(fetch)
