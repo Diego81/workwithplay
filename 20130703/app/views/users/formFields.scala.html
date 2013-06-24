@@ -1,0 +1,7 @@
+@(userForm: Form[User])
+
+@import helper._
+@import models.User
+
+@inputText(userForm("username"), 'id -> "usernameField")
+@inputText(userForm("age"))

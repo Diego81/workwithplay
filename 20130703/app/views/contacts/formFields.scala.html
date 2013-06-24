@@ -1,0 +1,7 @@
+@(contactForm: Form[Contact])
+
+@import helper._
+@import models.Contact
+
+@inputText(contactForm("contactType"))
+@inputText(contactForm("contact"))
