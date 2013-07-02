@@ -13,10 +13,13 @@ case class User(id: Pk[Int] = NotAssigned, username: String, age: Int) {
     }.getOrElse(Nil)
 }
 
-class UserWithCachedContacts(id: Pk[Int], username: String, age: Int) extends { val expirationTimeout = 5 } with User(id, username, age) with cache.EmptyCache[List[Contact]] {
-
+class UserWithCachedContacts(id: Pk[Int], username: String, age: Int) extends User(id, username, age) with cache.SingleElementCache[List[Contact]] with cache.ExpiryCache[List[Contact]]{
+  
+  override  val expirationTimeout = 5
+  
   override def contacts: List[Contact] = getOrFetch("contacts")(() => super.contacts)
 }
+
 
 object User {
 
