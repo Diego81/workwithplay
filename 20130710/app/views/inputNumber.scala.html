@@ -1,0 +1,5 @@
+@(field: Field, args: (Symbol, Any)*)(implicit handler: helper.FieldConstructor, lang: Lang)
+
+@helper.input.f(field, args.filter{ t => t._1 == 'class }.toArray){ (id, name, value, args) => 
+	<input type="number" id="@id" name="@name" @toHtmlArgs(args) />
+	}(handler, lang)

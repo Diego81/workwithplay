@@ -1,0 +1,17 @@
+@(userForm: Form[User])
+
+@import helper._
+@import models.User
+
+@main("Add a new User") {
+	<h1>Add a new User</h1>
+	@form(routes.Users.save(), 'id -> "userForm", 'class -> "form-horizontal") {
+		@formFields(userForm)
+		<div class="control-group">
+			<div class="controls">
+				<a href="@routes.Users.list">Cancel</a>
+				<button class="btn btn-primary" type="submit">Save</button>
+			</div>
+		</div>
+	}
+}

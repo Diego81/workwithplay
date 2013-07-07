@@ -1,0 +1,8 @@
+@(userForm: Form[User])
+
+@import helper._
+@import models.User
+@implicitField = @{ FieldConstructor(horizontalFormTB.f) }
+
+@inputText(userForm("username"), 'id -> "usernameField", 'showConstraints -> false)
+@inputNumber(userForm("age"))

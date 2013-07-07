@@ -1,0 +1,13 @@
+@(userId: Int, contactId: Int, contactForm: Form[Contact])
+
+@import helper._
+@import models.Contact
+
+@main("Edit contact") {
+	<h1>Edit contact</h1>
+	@form(routes.Contacts.update(userId, contactId)) {
+		@formFields(contactForm)
+		<button type="submit">Update</button>
+		<a href="@routes.Users.show(userId)">Cancel</a>
+	}
+}
