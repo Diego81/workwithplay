@@ -1,0 +1,8 @@
+@(contactForm: Form[Contact])
+
+@import helper._
+@import models.Contact
+@implicitField = @{ FieldConstructor(horizontalFormTB.f) }
+
+@inputText(contactForm("contactType"))
+@inputText(contactForm("contact"))

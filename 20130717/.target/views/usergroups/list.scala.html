@@ -1,0 +1,26 @@
+@(groups: Iterable[models.UserGroup])(implicit flash:Flash)
+
+@mainWithNav("All Groups", "groups") {
+	@flash.get("success").map { msg =>
+		<div class="alert alert-success">@msg</div>
+	}
+	@if(groups.isEmpty) {
+		<div class="alert">No groups found</div>
+	} else {
+	<table class="table">
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th></th>
+		</tr>
+		@for(group <- groups) {
+		<tr>
+			<td>@group.name</td>
+			<td>@group.description</td>
+			<td><a href="@routes.UserGroups.show(group.id.get)">Details</a></td>
+		</tr>
+		}
+	</table>
+	}
+	<a class="btn btn-primary" href="@routes.UserGroups.add">Add a new Group</a>
+}

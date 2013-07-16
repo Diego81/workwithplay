@@ -1,0 +1,17 @@
+@(elements: views.html.helper.FieldElements)
+
+@import views.html.helper._
+
+<div class="control-group @if(elements.hasErrors) {error}">
+    <label class="control-label" for="@elements.id">@elements.label</label>
+    <div class="controls">
+        @elements.input
+        @if(elements.hasErrors) {
+	        <span class="help-inline">@elements.errors.mkString(", ")</span>
+        } else{
+         	@if(elements.args.get('showConstraints).map{ _ == true}.getOrElse(true)){
+	        <span class="help-inline">@elements.infos.mkString(", ")</span> 
+			}
+        }
+    </div>
+</div>
