@@ -1,0 +1,5 @@
+@(groupForm: Form[models.UserGroup])
+
+@mainWithForm("Add a new Group", routes.UserGroups.save, routes.UserGroups.list) {
+	@formFields(groupForm)
+}

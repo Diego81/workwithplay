@@ -1,0 +1,20 @@
+@(title: String, formAction: Call, cancelAction: Call)(content: Html)
+
+@import helper._
+
+@main(title) {
+ 	<div class="row">
+ 		<div class="offset2">
+  			<h2>@title</h2>
+ 		</div>
+ 	</div>
+	@form(formAction, 'class -> "form-horizontal") {
+		@content
+		<div class="control-group">
+			<div class="controls">
+				<a href="@cancelAction">Cancel</a>
+				<button class="btn btn-primary" type="submit">Save</button>
+			</div>
+		</div>
+	}
+}

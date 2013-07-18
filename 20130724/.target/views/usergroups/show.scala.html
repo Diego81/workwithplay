@@ -1,0 +1,26 @@
+@(group: models.UserGroup)(implicit flash:Flash)
+
+@main("Group details") {
+ 	<div class="row">
+ 		<div class="offset2">
+  			<h2>Group details</h2>
+ 		</div>
+ 	</div>
+	@flash.get("success").map { msg =>
+		<div class="alert alert-success">@msg</div>
+	}
+ 	<div class="offset2">
+		<div id="alertDiv"></div>
+		<div><a href="@routes.UserGroups.list">Back to All Groups</a></div>
+		<dl>
+			<dt>Name</dt>
+			<dl>@group.name</dl>
+			<dt>Description</dt>
+			<dl>@group.description</dl>
+		</dl>
+		<div class="btn-group">
+			<a class="btn" href="@routes.UserGroups.edit(group.id.get)" >Edit</a>
+			@helper.form(routes.UserGroups.delete(group.id.get), 'class -> "delete-form"){<button class="btn btn-danger" type="submit">Delete</button>}
+		</div>
+	</div>
+}
