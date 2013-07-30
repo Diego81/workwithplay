@@ -1,0 +1,5 @@
+@(id: Int, userForm: Form[models.User], groups: List[models.UserGroup])
+
+@mainWithForm("Edit User", routes.Users.update(id), routes.Users.show(id)) {
+	@formFields(userForm, groups)
+}
