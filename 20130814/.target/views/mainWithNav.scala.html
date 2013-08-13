@@ -1,0 +1,13 @@
+@(title: String, section: String)(content: Html)
+
+@main(title) {
+	<div class="row">
+		@nav(section)
+	</div>
+ 	<div class="row">
+ 		<div class="offset2">
+  			<h2>@title</h2>
+ 		</div>
+ 	</div>
+	@content
+}

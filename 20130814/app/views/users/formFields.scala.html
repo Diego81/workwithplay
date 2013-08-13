@@ -1,0 +1,24 @@
+@(userForm: Form[User], groups: List[models.UserGroup])
+
+@import helper._
+@import models.User
+@implicitField = @{ FieldConstructor(horizontalFormTB.f) }
+
+@inputText(userForm("username"), 'id -> "usernameField", 'showConstraints -> false)
+@inputNumber(userForm("age"))
+  <div class="control-group">
+ 	<div class="controls">
+		<span class="help-block"><strong>Groups</strong></span>
+ 	</div>
+    <div class="controls">
+		@for(group <- groups) {
+	      <label class="checkbox">
+			<input type="checkbox" name="groups[]" value="@group.id.get" 
+			@userForm.value.map{ user => 
+				@if(user.userGroups.contains(group)) { checked="checked" } 
+			}/>
+			@group.name
+	      </label>
+		}
+    </div>
+  </div>

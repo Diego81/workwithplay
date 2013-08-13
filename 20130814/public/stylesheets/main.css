@@ -1,0 +1,26 @@
+h1 {
+	margin-bottom: 30px;
+}
+
+dd.error, #contactModal .error, #userModal .error {
+    color: red;
+    display: inline-block;
+	width: 160px;
+}
+.contactType {
+	font-weight: bold;
+}
+.delete-form {
+	display: inline;
+	margin-left: 10px;
+}
+.user-buttons {
+	margin: 15px 0 30px 0;
+}
+#contacts {
+	margin: 0;
+}
+#contacts li {
+	margin-bottom: 10px;
+	list-style: none;
+}

@@ -1,0 +1,5 @@
+@(userId: Int, id: Int, contactForm: Form[models.Contact])
+
+@mainWithForm("Edit Contact", routes.Contacts.update(userId, id), routes.Users.show(userId)) {
+	@formFields(contactForm)
+}

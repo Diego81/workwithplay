@@ -1,0 +1,19 @@
+@(section: String)
+
+@menuItems = @{Seq(
+    ("users", "Users", routes.Users.list),
+    ("groups", "Groups", routes.UserGroups.list)
+)}
+
+<ul class="nav nav-tabs">
+   @menuItems.map {
+       case (key, title, _) if key == section => {
+	     <li class="active">
+		    <a href="#">@title</a>
+		 </li>
+       }
+       case (key, title, url) => {
+           <li><a href="@url">@title</a></li>
+       }
+   }
+</ul>

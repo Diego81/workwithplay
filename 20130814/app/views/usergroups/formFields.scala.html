@@ -1,0 +1,8 @@
+@(groupForm: Form[UserGroup])
+
+@import helper._
+@import models.UserGroup
+@implicitField = @{ FieldConstructor(horizontalFormTB.f) }
+
+@inputText(groupForm("name"))
+@textarea(groupForm("description"))

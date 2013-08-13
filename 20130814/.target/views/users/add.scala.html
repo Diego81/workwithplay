@@ -1,0 +1,5 @@
+@(userForm: Form[models.User], groups: List[models.UserGroup])
+
+@mainWithForm("Add a new User", routes.Users.save, routes.Users.list) {
+	@formFields(userForm, groups)
+}
